@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -29,9 +30,14 @@ public class EmployeeDaoImpl extends AbstractDao implements EmployeeDao {
 
     @Override
     public void deleteEmployee(int id) {
-        Query query = getSession().createSQLQuery("delete from employee where id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaDelete<Employee> delete = cb.createCriteriaDelete(Employee.class);
+        Root<Employee> root = delete.from(Employee.class);
+        delete.where(cb.equal(root.get("id"), id));
+        getSession().createQuery(delete).executeUpdate();
+//        Query query = getSession().createSQLQuery("delete from employee where id = :id");
+//        query.setParameter("id", id);
+//        query.executeUpdate();
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.ems.hibernate;
 
 import com.ems.hibernate.config.AppConfig;
-import com.ems.hibernate.model.Employee;
 import com.ems.hibernate.service.EmployeeService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -12,15 +11,7 @@ public class Main {
         EmployeeService service = (EmployeeService) context.getBean("employeeService");
         service.findAllEmployees().forEach(System.out::println);
 
-        Employee e = service.findEmployee("a@l.com");
-        e.setContact("7896541230");
-        service.updateEmployee(e);
-
-        service.deleteEmployee(6);
-        Employee e1 = new Employee("b@l.com", e.getName(), e.getDesignationId(), "0123456789");
-        service.saveEmployee(e1);
-
+        service.deleteEmployee(7);
         service.findAllEmployees().forEach(System.out::println);
-
     }
 }
