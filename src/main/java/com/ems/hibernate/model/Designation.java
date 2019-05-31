@@ -25,6 +25,11 @@ public class Designation {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return String.format("[id: %d, name: %s]", getId(), getName());
+    }
+
     public int getId() {
         return id;
     }
