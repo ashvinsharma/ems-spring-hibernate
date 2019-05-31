@@ -45,4 +45,5 @@ public class Designation {
     public void setName(String name) {
         this.name = name;
     }
+
 }
