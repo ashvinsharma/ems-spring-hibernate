@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -37,7 +38,8 @@
                                 <c:out value="${desg.name}"/>
                             </form:option>
                         </c:forEach>
-                    </form:select></label></td>
+                    </form:select>
+                </label></td>
                 <td></td>
             </tr>
             <tr>

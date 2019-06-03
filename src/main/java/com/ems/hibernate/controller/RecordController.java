@@ -35,7 +35,6 @@ public class RecordController {
         designationService = (DesignationService) context.getBean("designationService");
         model.addAttribute("designations", designationService.findAllDesignations());
         model.addAttribute("employee", new Employee());
-        model.addAttribute("designation", new Designation());
         return "create";
     }
 
@@ -49,23 +48,23 @@ public class RecordController {
         return "search";
     }
 
-    //
-//    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-//    public String deleteRecord(@ModelAttribute("id") String id) {
-//        EmployeeDAOImpl emDao = new EmployeeDAOImpl();
-//        emDao.delete(Integer.parseInt(id));
-//
-//        return "redirect:/";
-//    }
-//
-//    @RequestMapping(value = "/update", method = RequestMethod.POST)
-//    public String updateRecord(@ModelAttribute Employee em) {
-//        EmployeeDAOImpl employeeDAO = new EmployeeDAOImpl();
-//        employeeDAO.update(em);
-//
-//        return "redirect:/";
-//    }
-//
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deleteRecord(@ModelAttribute("id") String id) {
+        employeeService = (EmployeeService) context.getBean("employeeService");
+        employeeService.deleteEmployee(Integer.parseInt(id));
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateRecord(@ModelAttribute Employee em) {
+        employeeService = (EmployeeService) context.getBean("employeeService");
+        employeeService.updateEmployee(em);
+
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insertRecord(@ModelAttribute("employee") @Valid Employee em, BindingResult bindingResult, Model model) {
         designationService = (DesignationService) context.getBean("designationService");

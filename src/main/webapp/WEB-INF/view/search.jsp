@@ -43,57 +43,55 @@
     </form:form>
     <c:if test="${not empty employeeDetails}">
         <c:set var="employeeMap" value="${employeeDetails.toLinkedHashMap()}"/>
-                <table>
-                    <tr>
-                        <c:forEach var="mapItems" items="${employeeMap}">
-                            <th><c:out value="${fn:toUpperCase(mapItems.key)}"/></th>
-                        </c:forEach>
-                    </tr>
-                    <form:form id="employee_details_form" method="post" modelAttribute="employeeDetails">
-                        <tr>
-                            <c:forEach var="mapItems" items="${employeeMap}">
-                                <td>
-                                    <label>
-                                        <c:choose>
-                                            <c:when test="${mapItems.key eq 'designation'}">
-                                                <select name="designation"
-                                                        onclick="editField(event)">
-                                                    <c:forEach var="desg" items="${requestScope.designations}">
-                                                        <option value="${desg.id}"
-                                                                <c:if test="${desg.id eq mapItems.value.id}">selected</c:if>
-                                                        >
-                                                            <c:out value="${desg.name}"/>
-                                                        </option>
-                                                    </c:forEach>
-                                                </select>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input readonly
-                                                       name="${mapItems.key}"
-                                                       id="${mapItems.key}"
-                                                       value="<c:out value="${mapItems.value}"/>"
-                                                       onclick="editField(event)"
-                                                />
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </label>
-                                </td>
-                            </c:forEach>
-                            <td>
-                                <button id="update_button"
-                                        formaction="${pageContext.request.contextPath}/record/update">Update
-                                </button>
-                            </td>
-                            <td>
-                                <button id="delete_button" formmethod="post"
-                                        formaction="${pageContext.request.contextPath}/record/delete">Delete
-                                </button>
-                                <button id="reset_button" type="button" style="display: none" onclick="resetFields()">Reset
-                                </button>
-                            </td>
-                        </tr>
-                    </form:form>
-                </table>
+        <table>
+            <tr>
+                <c:forEach var="mapItems" items="${employeeMap}">
+                    <th><c:out value="${fn:toUpperCase(mapItems.key)}"/></th>
+                </c:forEach>
+            </tr>
+            <form:form id="employee_details_form" method="post" modelAttribute="employeeDetails">
+                <tr>
+                    <c:forEach var="mapItems" items="${employeeMap}">
+                        <td>
+                            <label>
+                                <c:choose>
+                                    <c:when test="${mapItems.key eq 'designation'}">
+                                        <form:select path="designationId" name="designation" onclick="editField(event)">
+                                            <form:options items="${designations}"/>
+                                            <%--                                                    <c:forEach var="desg" items="${requestScope.designations}">--%>
+                                            <%--                                                        <form:option id="${desg.id}" value="${desg}" sele"${desg.id eq mapItems.value.id? 'selected':''}">--%>
+                                            <%--                                                        <c:out value="${desg.name}"/>--%>
+                                            <%--                                                    </form:option>--%>
+                                            <%--                    </c:forEach>--%>
+                                        </form:select>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input readonly
+                                               name="${mapItems.key}"
+                                               id="${mapItems.key}"
+                                               value="<c:out value="${mapItems.value}"/>"
+                                               onclick="editField(event)"
+                                        />
+                                    </c:otherwise>
+                                </c:choose>
+                            </label>
+                        </td>
+                    </c:forEach>
+                    <td>
+                        <button id="update_button"
+                                formaction="${pageContext.request.contextPath}/record/update">Update
+                        </button>
+                    </td>
+                    <td>
+                        <button id="delete_button" formmethod="post"
+                                formaction="${pageContext.request.contextPath}/record/delete">Delete
+                        </button>
+                        <button id="reset_button" type="button" style="display: none" onclick="resetFields()">Reset
+                        </button>
+                    </td>
+                </tr>
+            </form:form>
+        </table>
     </c:if>
 </div>
 </body>
