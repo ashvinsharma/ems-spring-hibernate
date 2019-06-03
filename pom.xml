@@ -94,8 +94,4 @@
             <version>3.25.0-GA</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <finalName>springHibernate</finalName>
-    </build>
 </project>

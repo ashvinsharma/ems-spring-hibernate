@@ -18,7 +18,8 @@ public class Designation {
     @Column(name = "name")
     private String name;
 
-    public Designation() {}
+    public Designation() {
+    }
 
     public Designation(int id, String name) {
         this.id = id;

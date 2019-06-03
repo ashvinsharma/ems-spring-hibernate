@@ -2,13 +2,14 @@ package com.ems.hibernate.model;
 
 
 import javax.persistence.*;
+import java.util.LinkedHashMap;
 
 @Entity
 @Table(name = "employee")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -37,6 +38,16 @@ public class Employee {
         this.name = name;
         this.designationId = designationId;
         this.contact = contact;
+    }
+
+    public LinkedHashMap toLinkedHashMap() {
+        LinkedHashMap<String, ? super Object> m = new LinkedHashMap<>();
+        m.put("id", getId());
+        m.put("name", getName());
+        m.put("email", getEmail());
+        m.put("designation", getDesignationId());
+        m.put("contact", getContact());
+        return m;
     }
 
     public int getId() {
