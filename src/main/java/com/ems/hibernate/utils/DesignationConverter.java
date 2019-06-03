@@ -8,7 +8,17 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Custom converter which converts String from JSP forms to Designation.
+ * Expects the string to be in the following format -> [id: 1, name: HR]
+ */
 public class DesignationConverter implements Converter<String, Designation> {
+    /**
+     * @return {@link Designation}
+     * <p>
+     * which is used by Spring under the hood whenever any entry is
+     * submitted on the frontend.
+     */
     @Override
     public Designation convert(String source) {
         Matcher matcher = Pattern.compile("(\\w{0,3} \\S{1,2})[,|\\]]").matcher(source); //old regex for future reference [ ](\\S{1,2})[,|\\]]")
