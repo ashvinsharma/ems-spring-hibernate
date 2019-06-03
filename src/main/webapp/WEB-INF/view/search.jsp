@@ -57,12 +57,11 @@
                                 <c:choose>
                                     <c:when test="${mapItems.key eq 'designation'}">
                                         <form:select path="designationId" name="designation" onclick="editField(event)">
-                                            <form:options items="${designations}"/>
-                                            <%--                                                    <c:forEach var="desg" items="${requestScope.designations}">--%>
-                                            <%--                                                        <form:option id="${desg.id}" value="${desg}" sele"${desg.id eq mapItems.value.id? 'selected':''}">--%>
-                                            <%--                                                        <c:out value="${desg.name}"/>--%>
-                                            <%--                                                    </form:option>--%>
-                                            <%--                    </c:forEach>--%>
+                                            <c:forEach var="desg" items="${requestScope.designations}">
+                                                <form:option id="${desg.id}" value="${desg}">
+                                                    <c:out value="${desg.name}"/>
+                                                </form:option>
+                                            </c:forEach>
                                         </form:select>
                                     </c:when>
                                     <c:otherwise>
